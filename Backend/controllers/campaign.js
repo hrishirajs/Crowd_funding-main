@@ -3,43 +3,43 @@ const db = require("../models");
 // The below code is only for development stage
 // To add some default items in our DB (Campaign collection) and check the api
 const item1 = new db.Campaign({
-  title: "test1",
+  title: "Support Cancer Research",
   description:
-    "test1dloren jhbvsd  bjbdsv chjb cdbhb bsdcb nb hg asnb hj  asbhbsjhbjhhjaxvhgbcas  hg.sahgvbcshgnbsa ghcsab hjasbjhabs  asbjh sx hahs bscjh",
-  imageUrl:
-    "https://image.shutterstock.com/image-photo/bright-spring-view-cameo-island-260nw-1048185397.jpg",
-  required: 500,
-  start: "2020-12-22T11:18:54.919Z",
+"Join us in the fight against cancer. Your donations will help fund vital research to find a cure and support patients with the care they need during their treatment journey. Together, we can make a difference in the lives of those battling cancer",
+    imageUrl:
+    "https://www.shutterstock.com/image-photo/secure-high-level-laboratory-scientists-coverall-684989614.jpg",
+  required: 500000,
+  start: "2024-11-17T15:47:10.475+00:00",
 });
 
 const item2 = new db.Campaign({
-  title: "test2",
+  title: "Build Schools for Children",
   description:
-    "test2dloren jhbvsd  bjbdsv chjb cdbhb bsdcb nb hg asnb hj  asbhbsjhbjhhjaxvhgbcas  hg.sahgvbcshgnbsa ghcsab hjasbjhabs  asbjh sx hahs bscjh",
+"Help provide education to children in underprivileged areas. Your donations will go towards building new schools, providing supplies, and supporting teachers. Education is a powerful tool to break the cycle of poverty, and you can be a part of that change.",
   imageUrl:
-    "https://image.shutterstock.com/image-photo/bright-spring-view-cameo-island-260nw-1048185397.jpg",
-  required: 100,
-  start: "2020-12-20T11:18:54.919Z",
+    "hhttps://www.shutterstock.com/image-photo/katni-india-january-1-202.0-indian-1605120940.jpg",
+  required: 2500000,
+  start: "2024-11-17T15:47:10.475+00:00",
 });
 
 const item3 = new db.Campaign({
-  title: "test3",
+  title: "Provide Clean Water to Communities",
   description:
-    "test3dloren jhbvsd  bjbdsv chjb cdbhb bsdcb nb hg asnb hj  asbhbsjhbjhhjaxvhgbcas  hg.sahgvbcshgnbsa ghcsab hjasbjhabs  asbjh sx hahs bscjh",
+    "Access to clean water is a basic human right. Help us bring clean drinking water to communities around the world that suffer from water scarcity. Your donation will build wells and provide filtration systems, ensuring families have access to safe water.",
   imageUrl:
-    "https://image.shutterstock.com/image-photo/bright-spring-view-cameo-island-260nw-1048185397.jpg",
-  required: 5000,
-  start: "2020-12-19T11:18:54.919Z",
+    "https://www.shutterstock.com/image-photo/clean-water-storage-place-mossy-bottoms-2401894695jpg",
+  required: 20000,
+  start: "2024-11-17T15:47:10.475+00:00",
 });
 
 const item4 = new db.Campaign({
-  title: "test4",
+  title: "Feed the Homeless",
   description:
-    "test4dloren jhbvsd  bjbdsv chjb cdbhb bsdcb nb hg asnb hj  asbhbsjhbjhhjaxvhgbcas  hg.sahgvbcshgnbsa ghcsab hjasbjhabs  asbjh sx hahs bscjh",
+    "Every night, thousands of people go to bed hungry. Your donation will provide meals for homeless individuals, ensuring they have a warm meal and a sense of dignity. Together, we can help end hunger and support those in need in our communities.",
   imageUrl:
-    "https://image.shutterstock.com/image-photo/bright-spring-view-cameo-island-260nw-1048185397.jpg",
+    "https://www.shutterstock.com/image-photo/homeless-people-helped-food-relief-famine-1432140299.jpg",
   required: 50000,
-  start: "2020-12-22T11:19:54.919Z",
+  start: "2024-11-17T15:47:10.475+00:00",
 });
 
 const defaultItems = [item1, item2, item3, item4];
