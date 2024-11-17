@@ -9,8 +9,17 @@ const PORT = process.env.PORT||3000;
 const routes = require("./routes");
 
 // -----Middleware----- /
-app.use(cors());
+
 app.use(bodyParser.json());
+
+app.use(cors((
+  {
+  origin: ["https://deploy-mern-1whq.vercel.app"],
+  method: ["POST","GET"],
+  credentials:true
+  }
+  ));
+  
 
 //-----Routes----- 
 app.get("/", (req, res) => {
