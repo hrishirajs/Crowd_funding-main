@@ -15,7 +15,7 @@ const AdminDashboard = (p) => {
     return null;
   }
   let email = jwtDecode(localStorage.getItem("token")).email;
-  // let id = jwtDecode(localStorage.getItem("token")).foo;
+  let id = jwtDecode(localStorage.getItem("token")).foo;
   return (
     <React.Fragment>
       <NavBar />
