@@ -1,19 +1,29 @@
 const db = require("../models");
 const jwt = require("jsonwebtoken");
-const { User } = require("../models");
 require("dotenv").config();
 
 // Default admin for development stage
 db.User.find().exec(function (err, results) {
-  var count = results.length;
+  if (err) {
+    console.error("Error querying User collection:", err);
+    return; // Exit if there's an error
+  }
 
-  if (count == 0) {
+  // Ensure `results` is defined and handle the case when it's undefined
+  if (!results || results.length === 0) {
     const user = new db.User({
       email: "huskybeats11@gmail.com",
-      password: "koby6212",  // Direct password without hashing
+      password: "koby6212", // Direct password without hashing
       isVerified: true,
     });
-    user.save();
+
+    user.save((saveErr) => {
+      if (saveErr) {
+        console.error("Error saving default admin user:", saveErr);
+      } else {
+        console.log("Default admin user created successfully.");
+      }
+    });
   }
 });
 
@@ -49,7 +59,7 @@ const addAdmin = (req, res) => {
 
     const newUser = {
       email: userData.email,
-      password: userData.password,  // Direct password without hashing
+      password: userData.password, // Direct password without hashing
     };
 
     db.User.create(newUser, (err, createdUser) => {
@@ -98,7 +108,8 @@ const login = (req, res) => {
 
     if (!foundUser) {
       return res.status(400).json({
-        message: "Email address is not associated with any account. Please check and try again",
+        message:
+          "Email address is not associated with any account. Please check and try again",
       });
     }
 
@@ -124,7 +135,6 @@ const login = (req, res) => {
   });
 };
 
-// Rest of the functions remain the same
 const create = async (req, res) => {
   const campaign = { ...req.body, raised: 0 };
 
