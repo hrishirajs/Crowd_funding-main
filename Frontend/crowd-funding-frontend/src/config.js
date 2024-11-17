@@ -1,4 +1,4 @@
-const backendURL = "https://crowd-funding-main-backend-s46j.onrender.com";
+const backendURL = "https://crowd-funding-main-backend.onrender.com";
 //const backendURL = "http://localhost:3000/";
 
 export const getAllCampaignsUrl = () => {
