@@ -62,21 +62,22 @@ db.Campaign.find().exec(function (err, results) {
 // Till here ----------------------------------------------------------------------------------
 
 function hideTransactionID(donors) {
-  var i, j;
-  let text = "";
+  if (!donors || !Array.isArray(donors)) {
+    console.log("No donors or donors is not an array.");
+    return;
+  }
 
-  for (i = 0; i < donors.length; i++) {
-    var S = donors[i].transactionID;
+  let text = "";
+  for (let i = 0; i < donors.length; i++) {
+    let S = donors[i].transactionID;
     text = "";
-    for (j = 0; j < S.length; j++) {
+    for (let j = 0; j < S.length; j++) {
       if (j > 3 && j < S.length - 3) text = text + "X";
       else text = text + S[j];
     }
 
     donors[i].transactionID = text;
   }
-
-  return;
 }
 
 const show = async (req, res) => {
@@ -86,11 +87,7 @@ const show = async (req, res) => {
 
       if (showCampaign) {
         // Ensure 'donors' exists and is an array
-        if (showCampaign.donors && Array.isArray(showCampaign.donors)) {
-          hideTransactionID(showCampaign.donors);
-        } else {
-          console.log("No donors or donors is not an array");
-        }
+        hideTransactionID(showCampaign.donors);
 
         res.status(200).json(showCampaign);
       } else {
@@ -112,37 +109,32 @@ const show = async (req, res) => {
 };
 
 const showAll = async (req, res) => {
-  //console.log("success");
   try {
     // Add this code in CreateCampaign Route during production
     // To sort campaign in descending order of dates
     await db.Campaign.find({})
       .sort({ start: -1 })
       .exec(function (err, allCampaign) {
-        if (err) console.log(err);
-        else {
-          //console.log("Sorted");
-
+        if (err) {
+          console.log(err);
+          return res.status(500).json({ message: "Database query failed" });
+        } else {
           var len = allCampaign.length;
 
           var i;
           for (i = 0; i < len; i++) {
             let currCampaign = allCampaign[i];
             // Ensure 'donors' exists and is an array
-            if (currCampaign.donors && Array.isArray(currCampaign.donors)) {
-              hideTransactionID(currCampaign.donors);
-            } else {
-              console.log("No donors or donors is not an array for campaign:", currCampaign.title);
-            }
+            hideTransactionID(currCampaign.donors);
           }
 
           res.status(200).json(allCampaign);
         }
       });
   } catch (err) {
-    console.log("Server error.");
+    console.log("Server error.", err);
     return res.status(500).json({
-      message: "Something went wrong when trying to get all campaign",
+      message: "Something went wrong when trying to get all campaigns",
     });
   }
 };
