@@ -1,4 +1,4 @@
-const backendURL = "https://crowd-funding-backend.vercel.app/";
+const backendURL = "https://crowd-funding-main-backend-s46j.onrender.com";
 //const backendURL = "http://localhost:3000/";
 
 const express = require("express");
