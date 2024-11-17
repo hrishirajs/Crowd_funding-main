@@ -63,7 +63,7 @@ db.Campaign.find().exec(function (err, results) {
 
 function hideTransactionID(donors) {
   var i, j;
-  text = "";
+  let text = "";
 
   for (i = 0; i < donors.length; i++) {
     var S = donors[i].transactionID;
@@ -85,25 +85,28 @@ const show = async (req, res) => {
       let showCampaign = await db.Campaign.findById(req.params.id);
 
       if (showCampaign) {
-        hideTransactionID(showCampaign.donors);
+        // Ensure 'donors' exists and is an array
+        if (showCampaign.donors && Array.isArray(showCampaign.donors)) {
+          hideTransactionID(showCampaign.donors);
+        } else {
+          console.log("No donors or donors is not an array");
+        }
 
         res.status(200).json(showCampaign);
       } else {
-        // console.log("Invalid Campaign Id.");
         res.status(404).json({
-          message: "Page Not Found",
+          message: "Campaign not found",
         });
       }
     } else {
-      // console.log("Invalid Campaign Id.");
       res.status(404).json({
-        message: "Page Not Found.",
+        message: "Invalid Campaign ID format",
       });
     }
   } catch (err) {
-    console.log("Server error.");
+    console.log("Error while fetching campaign:", err);
     return res.status(500).json({
-      message: "Something wrong when getting the campaign",
+      message: "Something went wrong when getting the campaign",
     });
   }
 };
@@ -125,7 +128,12 @@ const showAll = async (req, res) => {
           var i;
           for (i = 0; i < len; i++) {
             let currCampaign = allCampaign[i];
-            hideTransactionID(currCampaign.donors);
+            // Ensure 'donors' exists and is an array
+            if (currCampaign.donors && Array.isArray(currCampaign.donors)) {
+              hideTransactionID(currCampaign.donors);
+            } else {
+              console.log("No donors or donors is not an array for campaign:", currCampaign.title);
+            }
           }
 
           res.status(200).json(allCampaign);
